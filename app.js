@@ -4,7 +4,7 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const AccessLogger = require('./utils/logger');
-
+const Routes = require('./routes/index');
 
 (async () => {
     const app = express();
@@ -32,8 +32,7 @@ const AccessLogger = require('./utils/logger');
         }
     });
     //初始化路由
-    require('./routes/index')(app);
-
+    new Routes(app);
     // 挂载session
     app.use(session({
         secret: config.app['session-secret'],
